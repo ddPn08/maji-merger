@@ -114,8 +114,6 @@ def create_ui():
                 vae_c = gr.Dropdown(label="VAE C", choices=list(sd_vae.vae_dict.keys()))
                 filename = gr.Text(label="Output filename")
 
-            each_key = gr.Checkbox(False, label="Each key")
-
             mode = gr.Radio(
                 label="Merge mode",
                 choices=[
@@ -129,6 +127,7 @@ def create_ui():
                 base_alpha = gr.Slider(
                     label="Base alpha", minimum=0, maximum=1, value=0.5, step=0.01
                 )
+                each_key = gr.Checkbox(False, label="Each key")
                 override = gr.Checkbox(False, label="Override")
 
             weights_text = gr.TextArea(

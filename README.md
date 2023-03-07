@@ -7,23 +7,19 @@ A WebUI extension for merging VAE
 
 # Usage
 
-## Normal merge
-![](./images/readme-normal-01.png)
+![](./images/readme-normal.png)
 
 |||
 |-|-|
 |VAE A, VAE B, VAE C|VAE used for merging|
 |Output filename|File name for saving the merged VAE. It will be saved in `models/VAE` or the directory specified by `--vae-dir`.|
 |Merge mode|Expression used for merging|
+|Each key|Merge each key with the specified number|
 |Override|Overwrite the VAE if it already exists.|
 
 
-## Each key merge
-![](./images/readme-normal-02.png)
-
 You can change the alpha of each key by moving the slider.
 
-### specify in more detail
 All alphas are passed in json format.
 
 Prefer the weight of the longest key whose beginning matches.
