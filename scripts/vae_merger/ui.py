@@ -171,7 +171,8 @@ def create_ui():
                         "decoder.up.2",
                         "decoder.up.3",
                         "decoder.mid",
-                        "decoder.conv_in"
+                        "decoder.conv_in",
+                        "post_quant_conv"
                     ]:
                         weights[key] = gr.Slider(
                             label=key, minimum=0, maximum=1, step=0.01, value=0.5
