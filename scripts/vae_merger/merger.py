@@ -24,11 +24,7 @@ def save_vae(vae, dest):
         torch.save(vae, dest)
 
 
-def normal_merge(vae_a, vae_b, vae_c, alpha, mode):
-    return each_key(vae_a, vae_b, vae_c, alpha, None, mode)
-
-
-def each_key(vae_a, vae_b, vae_c, alpha, weights, mode):
+def merge(vae_a, vae_b, vae_c, alpha, weights, mode):
     result = dict()
 
     print(f"Loading vae: {vae_a}")
