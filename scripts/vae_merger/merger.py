@@ -24,16 +24,16 @@ def save_vae(vae, dest):
         torch.save(vae, dest)
 
 
-def merge(vae_a, vae_b, vae_c, alpha, weights, mode):
+def merge(vae_a_path, vae_b_path, vae_c_path, alpha, weights, mode):
     result = dict()
 
-    print(f"Loading vae: {vae_a}")
-    vae_a = sd_vae.load_vae_dict(sd_vae.vae_dict[vae_a], map_location="cpu")
-    print(f"Loading vae: {vae_b}")
-    vae_b = sd_vae.load_vae_dict(sd_vae.vae_dict[vae_b], map_location="cpu")
-    if vae_c is not None:
-        print(f"Loading vae: {vae_c}")
-        vae_c = sd_vae.load_vae_dict(sd_vae.vae_dict[vae_c], map_location="cpu")
+    print(f"Loading vae: {vae_a_path}")
+    vae_a = sd_vae.load_vae_dict(sd_vae.vae_dict[vae_a_path], map_location="cpu")
+    print(f"Loading vae: {vae_b_path}")
+    vae_b = sd_vae.load_vae_dict(sd_vae.vae_dict[vae_b_path], map_location="cpu")
+    if vae_c_path is not None:
+        print(f"Loading vae: {vae_c_path}")
+        vae_c = sd_vae.load_vae_dict(sd_vae.vae_dict[vae_c_path], map_location="cpu")
 
     def get_alpha(key):
         try:
@@ -50,7 +50,7 @@ def merge(vae_a, vae_b, vae_c, alpha, weights, mode):
 
     vae_keys = (
         vae_a.keys() & vae_b.keys()
-        if vae_c is None
+        if vae_c_path is None
         else vae_a.keys() & vae_b.keys() & vae_c.keys()
     )
 
@@ -58,7 +58,7 @@ def merge(vae_a, vae_b, vae_c, alpha, weights, mode):
         current_alpha = get_alpha(key) if weights is not None else alpha
 
         if mode == "Weight sum":
-            result[key] = current_alpha * vae_a[key] + (1 - current_alpha) * vae_b[key]
+            result[key] = (1 - current_alpha) * vae_a[key] + current_alpha * vae_b[key]
         elif mode == "Add difference":
             assert vae_c is not None, "vae_c is undefined"
             result[key] = vae_a[key] + (vae_b[key] - vae_c[key]) * current_alpha
