@@ -27,4 +27,4 @@ For example
 }
 ```
 
-In this case, 0.5 for `model.diffusion_model.input_blocks.0.0.weight`, 0.3 for keys starting with `model.diffusion_model.input_blocks.1`, and 0.3 for keys starting with `model.diffusion_model.middle_block`. 0.7 is used, otherwise the `base alpha` value is used.
+In this case, 0.5 is used for keys with `model.diffusion_model.input_blocks.0.0.weight`, 0.3 for keys starting with `model.diffusion_model.input_blocks.1`, and 0.7 for keys starting with `model.diffusion_model.middle_block`. Otherwise the "base alpha" value is used.
